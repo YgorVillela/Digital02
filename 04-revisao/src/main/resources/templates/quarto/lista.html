@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Quartos</title>
+</head>
+<body>
+
+<div layout:fragment="corpo">
+    <h2>Quartos</h2>
+    <form class="form-inline mb-2" th:action="@{/quarto/listar}">
+        <select class="form-control" name="codigoHotel">
+            <option value="0">Hoteis</option>
+            <option th:each="h:${hoteis}" th:text="${h.nome}" th:value="${h.codigo}"></option>
+        </select>
+        <input type="submit" value="Pesquisar" class="btn btn-success ml-2">
+    </form>
+    <table class="table">
+        <tr>
+            <th>Hotel</th>
+            <th>Número</th>
+            <th>Valor</th>
+            <th>Suíte</th>
+        </tr>
+        <tr th:each="q:${lista}">
+            <td th:text="${q.hotel.nome}"></td>
+            <td th:text="${q.numero}"></td>
+            <td th:text="${q.valor}"></td>
+            <td th:text="${q.suite?'Sim':'Não'}"></td>
+            <td>
+               <a th:href="@{/reserva/cadastrar/}" class="btn btn-outline-dark btn-sm">Reservar</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
